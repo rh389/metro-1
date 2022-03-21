@@ -31,6 +31,9 @@ jobs:
       - name: Setup EMSDK
         uses: mymindstorm/setup-emsdk@v11
 
+      - name: Debug EMSDK
+        run: find $EMSDK
+
       - name: Build host hermes
         run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
 
