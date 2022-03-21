@@ -17,13 +17,13 @@ jobs:
         uses: actions/checkout@v2.0.0
 
       - name: Clone hermes
-        run: git clone https://github.com/facebook/hermes
+        run: git clone https://github.com/facebook/hermes $RUNNER_TEMP/hermes
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Build host hermes
-        run: python3 $GITHUB_WORKSPACE/hermes/utils/build/configure.py $GITHUB_WORKSPACE/build_host_hermes
+        run: python3 $RUNNER_TEMP/hermes/utils/build/configure.py $RUNNER_TEMP/build_host_hermes
 
       - name: Setup EMSDK
         uses: mymindstorm/setup-emsdk@v11
@@ -31,12 +31,12 @@ jobs:
       - name: Build emhermesc.js
         run: |
           python3 ./hermes/utils/build/configure.py \
-            --cmake-flags " -DIMPORT_HERMESC:PATH=$GITHUB_WORKSPACE/build_host_hermes/ImportHermesc.cmake " \
+            --cmake-flags " -DIMPORT_HERMESC:PATH=$RUNNER_TEMP/build_host_hermes/ImportHermesc.cmake " \
             --distribute \
             --wasm \
             --emscripten-platform=upstream \
             --emscripten-root="$EMSDK/upstream/emscripten" \
-            $GITHUB_WORKSPACE/embuild
+            $RUNNER_TEMP/embuild
 
       - name: Show result
-        run: ls -la $GITHUB_WORKSPACE/embuild
+        run: ls -la $RUNNER_TEMP/embuild
