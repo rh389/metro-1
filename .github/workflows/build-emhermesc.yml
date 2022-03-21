@@ -16,14 +16,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.0.0
 
-      - name: Set up EMSDK
-        uses: mymindstorm/setup-emsdk@v11
-
-      - name: Set up Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
-
       - name: Clone hermes
         run: git clone https://github.com/facebook/hermes
 
       - name: Build host hermes
+        uses: seanmiddleditch/gha-setup-ninja@master
         run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
+
+      - name: Build emhermesc.js
+        uses: mymindstorm/setup-emsdk@v11
+        run: python3 ./hermes/utils/build/configure.py \
+    --cmake-flags " -DIMPORT_HERMESC:PATH=./build_host_hermesc/ImportHermesc.cmake " \
+    --distribute \
+    --wasm \
+    --emscripten-platform=upstream \
+    --emscripten-root="$EMSDK" \
+    ./embuild
