@@ -44,5 +44,5 @@ jobs:
             --distribute \
             --wasm \
             --emscripten-platform=upstream \
-            --emscripten-root="$EMSDK" \
+            --emscripten-root="$EMSDK/upstream" \
             `pwd`/embuild
