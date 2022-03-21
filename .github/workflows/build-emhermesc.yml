@@ -19,12 +19,16 @@ jobs:
       - name: Clone hermes
         run: git clone https://github.com/facebook/hermes
 
-      - name: Build host hermes
+      - name: Setup EMSDK
+        uses: mymindstorm/setup-emsdk@v11
+
+      - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Build host hermes
         run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
 
       - name: Build emhermesc.js
-        uses: mymindstorm/setup-emsdk@v11
         run: |
           python3 ./hermes/utils/build/configure.py \
             --cmake-flags " -DIMPORT_HERMESC:PATH=./build_host_hermesc/ImportHermesc.cmake " \
