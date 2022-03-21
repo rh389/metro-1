@@ -37,9 +37,9 @@ jobs:
       - name: Build emhermesc.js
         run: |
           python3 ./hermes/utils/build/configure.py \
-            --cmake-flags " -DCMAKE_MAKE_PROGRAM=`which ninja` -DIMPORT_HERMESC:PATH=./build_host_hermesc/ImportHermesc.cmake " \
+            --cmake-flags " -DCMAKE_MAKE_PROGRAM=`which ninja` -DIMPORT_HERMESC:PATH=`pwd`/build_host_hermesc/ImportHermesc.cmake " \
             --distribute \
             --wasm \
             --emscripten-platform=upstream \
             --emscripten-root="$EMSDK" \
-            ./embuild
+            `pwd`/embuild
