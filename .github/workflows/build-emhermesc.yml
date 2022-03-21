@@ -46,3 +46,9 @@ jobs:
 
       - name: Show result
         run: ls -la $RUNNER_TEMP/embuild/bin
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: emhermesc.js
+          path: $RUNNER_TEMP/embuild/bin/hermes.js
