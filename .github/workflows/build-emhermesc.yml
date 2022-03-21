@@ -19,6 +19,9 @@ jobs:
       - name: Set up EMSDK
         uses: mymindstorm/setup-emsdk@v11
 
+      - name: Set up Ninja
+        uses: seanmiddleditch/gha-setup-ninja@master
+
       - name: Clone hermes
         run: git clone https://github.com/facebook/hermes
 
