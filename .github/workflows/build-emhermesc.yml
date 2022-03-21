@@ -23,9 +23,10 @@ jobs:
         uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Debug
-        run: |
-          which ninja \
-          echo "$PATH"
+        run: which ninja
+
+      - name: Debug path
+        run: echo $PATH
 
       - name: Setup EMSDK
         uses: mymindstorm/setup-emsdk@v11
