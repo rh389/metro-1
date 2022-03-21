@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "packages/metro-hermes-compiler/**"
+      - ".github/workflows/build-emhermesc.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.0.0
+
+      - name: Set up EMSDK
+        uses: mymindstorm/setup-emsdk@v11
+
+      - name: Clone hermes
+        run: git clone https://github.com/facebook/hermes
+
+      - name: Build host hermes
+        run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
