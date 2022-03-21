@@ -28,11 +28,13 @@ jobs:
       - name: Debug path
         run: echo $PATH
 
+      - name: Build host hermes
+        run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
+
+
       - name: Debug build_host_hermes
         run: find ./build_host_hermes
 
-      - name: Build host hermes
-        run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
 
       - name: Setup EMSDK
         uses: mymindstorm/setup-emsdk@v11
