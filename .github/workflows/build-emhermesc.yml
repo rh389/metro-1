@@ -47,14 +47,20 @@ jobs:
       - name: Show result
         run: ls -la $RUNNER_TEMP/embuild/bin
 
+      - name: Move build output
+        run: mv $RUNNER_TEMP/embuild/bin ./output
+
+      - name: Show output
+        run: ls -la output
+
       - name: Upload build artifact
         uses: actions/upload-artifact@v3
         with:
           name: emhermesc.js
-          path: $RUNNER_TEMP/embuild/bin/hermes.js
+          path: output/hermes.js
 
       - name: Upload build artifact (WASM)
         uses: actions/upload-artifact@v3
         with:
           name: emhermesc.wasm
-          path: $RUNNER_TEMP/embuild/bin/hermes.wasm
+          path: output/hermes.wasm
