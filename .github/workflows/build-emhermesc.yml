@@ -25,7 +25,7 @@ jobs:
       - name: Debug
         run: |
           which ninja \
-          echo $PATH
+          echo "$PATH"
 
       - name: Setup EMSDK
         uses: mymindstorm/setup-emsdk@v11
