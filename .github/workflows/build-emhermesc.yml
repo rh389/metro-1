@@ -19,11 +19,16 @@ jobs:
       - name: Clone hermes
         run: git clone https://github.com/facebook/hermes
 
-      - name: Setup EMSDK
-        uses: mymindstorm/setup-emsdk@v11
-
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@master
+
+      - name: Debug
+        run: |
+          which ninja \
+          echo $PATH
+
+      - name: Setup EMSDK
+        uses: mymindstorm/setup-emsdk@v11
 
       - name: Build host hermes
         run: python3 ./hermes/utils/build/configure.py ./build_host_hermes
