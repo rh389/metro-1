@@ -25,10 +25,11 @@ jobs:
 
       - name: Build emhermesc.js
         uses: mymindstorm/setup-emsdk@v11
-        run: python3 ./hermes/utils/build/configure.py \
-    --cmake-flags " -DIMPORT_HERMESC:PATH=./build_host_hermesc/ImportHermesc.cmake " \
-    --distribute \
-    --wasm \
-    --emscripten-platform=upstream \
-    --emscripten-root="$EMSDK" \
-    ./embuild
+        run: |
+          python3 ./hermes/utils/build/configure.py \
+            --cmake-flags " -DIMPORT_HERMESC:PATH=./build_host_hermesc/ImportHermesc.cmake " \
+            --distribute \
+            --wasm \
+            --emscripten-platform=upstream \
+            --emscripten-root="$EMSDK" \
+            ./embuild
