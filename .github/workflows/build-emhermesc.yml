@@ -52,3 +52,9 @@ jobs:
         with:
           name: emhermesc.js
           path: $RUNNER_TEMP/embuild/bin/hermes.js
+
+      - name: Upload build artifact (WASM)
+        uses: actions/upload-artifact@v3
+        with:
+          name: emhermesc.wasm
+          path: $RUNNER_TEMP/embuild/bin/hermes.wasm
