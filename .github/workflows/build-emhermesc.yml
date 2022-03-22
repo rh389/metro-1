@@ -20,7 +20,6 @@ jobs:
         run: echo "HERMES_REVISION=`cat packages/metro-hermes-compiler/hermes-revision`" >> $GITHUB_ENV
 
       - name: Use the value
-        id: step_two
         run: |
           echo "${{ env.HERMES_REVISION }}" # This will output 'yellow'
 
@@ -31,8 +30,7 @@ jobs:
             | tar xf - -C $RUNNER_TEMP/hermes \
             && echo "HERMES_CHECKOUT=`ls -d $RUNNER_TEMP/hermes/*`"
 
-      - name: Use the value
-        id: step_two
+      - name: Show the value
         run: |
           echo "${{ env.HERMES_CHECKOUT }}" # This will output 'yellow'
 
