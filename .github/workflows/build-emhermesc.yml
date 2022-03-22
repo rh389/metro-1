@@ -37,7 +37,13 @@ jobs:
             -B $RUNNER_TEMP/embuild \
             -DCMAKE_TOOLCHAIN_FILE=$EMSDK/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake \
             -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_EXE_LINKER_FLAGS="-s NODERAWFS=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s SINGLE_FILE=1" \
+            -DCMAKE_EXE_LINKER_FLAGS=" \
+              -s NODERAWFS=1 \
+              -s WASM=1 \
+              -s ALLOW_MEMORY_GROWTH=1 \
+              -s SINGLE_FILE=1 \
+              -s NODEJS_CATCH_EXIT=0 \
+              -s NODEJS_CATCH_REJECTION=0" \
             -DIMPORT_HERMESC:PATH="$RUNNER_TEMP/build_host_hermes/ImportHermesc.cmake"
 
       - name: Build
