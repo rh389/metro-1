@@ -87,8 +87,11 @@ jobs:
           name: emhermesc.js
           path: packages/metro-hermes-compiler/src/emhermesc.js
 
-      - uses: stefanzweifel/git-auto-commit-action@master
+      - run: Commit updated emhermesc.js to PR
+        uses: stefanzweifel/git-auto-commit-action@master
         if: github.event_name == 'pull_request' 
+        with:
+          commit_message: "Auto: Build emhermesc.js from hermes/${{ env.HERMES_REVISION }}"
 
       - name: Ensure the working tree is clean
         run: if [ -n "$(git status --porcelain)" ]; then exit 1; fi
