@@ -39,6 +39,8 @@ jobs:
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@856654e80dd21909aec244cd01bb96e5c841d64f
+        with:
+          dest: $RUNNER_TEMP/ninja
 
       - name: Configure build_host_hermes
         run: python3 $HERMES_CHECKOUT/utils/build/configure.py $RUNNER_TEMP/build_host_hermes
@@ -88,5 +90,5 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@master
         if: github.event_name == 'pull_request' 
 
-      - name: Fail on uncommitted changes
-        run: git status --porcelain
+      - name: Ensure the working tree is clean
+        run: if [ -n "$(git status --porcelain)" ]; then exit 1; fi
