@@ -16,14 +16,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.0.0
 
-      - name: Get hermes revision
+      - name: Determine target revision from packages/metro-hermes-compiler/hermes-revision
         run: echo "HERMES_REVISION=`cat packages/metro-hermes-compiler/hermes-revision`" >> $GITHUB_ENV
 
-      - name: Use the value
-        run: |
-          echo "${{ env.HERMES_REVISION }}" # This will output 'yellow'
-
-      - name: Clone hermes
+      - name: Clone hermes at ${{ env.HERMES_REVISION }}
         run: |
           mkdir $RUNNER_TEMP/hermes && curl \
             -L https://api.github.com/repos/facebook/hermes/tarball/${{ env.HERMES_REVISION }} \
