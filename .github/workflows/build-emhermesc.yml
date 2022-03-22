@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir $RUNNER_TEMP/hermes && curl \
             -L https://api.github.com/repos/facebook/hermes/tarball/${{ env.HERMES_REVISION }} \
-            | tar xf - -C $RUNNER_TEMP/hermes \
+            | tar xzf - -C $RUNNER_TEMP/hermes \
             && echo "HERMES_CHECKOUT=`ls -d $RUNNER_TEMP/hermes/*`" >> $GITHUB_ENV
 
       - name: Show the value
