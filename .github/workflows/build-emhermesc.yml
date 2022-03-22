@@ -16,6 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.0.0
 
+      - name: Get hermes revision
+        run: echo "HERMES_REVISION=`cat packages/metro-hermes-compiler/hermes-revision`" >> $GITHUB_ENV
+
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.HERMES_REVISION }}" # This will output 'yellow'
+
       - name: Clone hermes
         run: git clone https://github.com/facebook/hermes $RUNNER_TEMP/hermes
 
