@@ -26,10 +26,15 @@ jobs:
 
       - name: Clone hermes
         run: |
-          curl \
-            -H "Accept: application/vnd.github.v3+json" \
-            -s https://api.github.com/repos/facebook/hermes/tarball/${{ env.HERMES_REVISION }} \
-            | tar xvf - -C $RUNNER_TEMP
+          mkdir $RUNNER_TEMP/hermes && curl \
+            -L https://api.github.com/repos/facebook/hermes/tarball/${{ env.HERMES_REVISION }} \
+            | tar xf - -C $RUNNER_TEMP/hermes \
+            && echo "HERMES_CHECKOUT=`ls -d $RUNNER_TEMP/hermes/*`"
+
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.HERMES_CHECKOUT }}" # This will output 'yellow'
 
       - name: Show downloaded
         run: find $RUNNER_TEMP
