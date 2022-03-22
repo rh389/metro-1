@@ -88,14 +88,5 @@ jobs:
       - uses: stefanzweifel/git-auto-commit-action@master
         if: github.event_name == 'pull_request' 
 
-      - name: Move build output
-        run: mv $RUNNER_TEMP/embuild/bin ./output
-
-      - name: Show output
-        run: ls -la output
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: output
-          path: output
+      - name: Fail on uncommitted changes
+        run: git status --porcelain
