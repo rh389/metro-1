@@ -25,7 +25,14 @@ jobs:
           echo "${{ env.HERMES_REVISION }}" # This will output 'yellow'
 
       - name: Clone hermes
-        run: git clone https://github.com/facebook/hermes $RUNNER_TEMP/hermes
+        run: |
+          curl \
+            -H "Accept: application/vnd.github.v3+json" \
+            -s https://api.github.com/repos/facebook/hermes/tarball/${{ env.HERMES_REVISION }} \
+            | tar xvf - -C $RUNNER_TEMP
+
+      - name: Show downloaded
+        run: find $RUNNER_TEMP
 
       - name: Setup Ninja
         uses: seanmiddleditch/gha-setup-ninja@856654e80dd21909aec244cd01bb96e5c841d64f
