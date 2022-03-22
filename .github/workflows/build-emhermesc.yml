@@ -1,9 +1,7 @@
 name: Deploy
 
 on:
-  push:
-    branches:
-      - "main"
+  [push,pull_request]:
     paths:
       - "packages/metro-hermes-compiler/**"
       - ".github/workflows/build-emhermesc.yml"
@@ -13,10 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout code (PR)
         uses: actions/checkout@v2.0.0
+        if: github.event_name == 'pull_request' 
         with:
           ref: ${{ github.head_ref }}
+
+      - name: Checkout code (Push)
+        uses: actions/checkout@v2.0.0
+        if: github.event_name == 'push'
 
       - name: Determine target revision from packages/metro-hermes-compiler/hermes-revision
         run: echo "HERMES_REVISION=`cat packages/metro-hermes-compiler/hermes-revision`" >> $GITHUB_ENV
@@ -77,6 +80,7 @@ jobs:
           path: packages/metro-hermes-compiler/src/emhermesc.js
 
       - uses: stefanzweifel/git-auto-commit-action@master
+        if: github.event_name == 'pull_request' 
 
       - name: Move build output
         run: mv $RUNNER_TEMP/embuild/bin ./output
