@@ -1,7 +1,13 @@
 name: Deploy
 
 on:
-  [push,pull_request]:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "packages/metro-hermes-compiler/**"
+      - ".github/workflows/build-emhermesc.yml"
+  pull_request:
     paths:
       - "packages/metro-hermes-compiler/**"
       - ".github/workflows/build-emhermesc.yml"
