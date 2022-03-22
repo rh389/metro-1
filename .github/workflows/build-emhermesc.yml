@@ -67,6 +67,9 @@ jobs:
       - name: Build
         run: cmake --build $RUNNER_TEMP/embuild --target emhermesc
 
+      - name: Add header
+        run: cat packages/metro-hermes-compiler/emhermesc.js.header $RUNNER_TEMP/embuild/bin/emhermesc.js > packages/metro-hermes-compiler/emhermesc.js
+
       - name: Move build output
         run: mv $RUNNER_TEMP/embuild/bin ./output
 
@@ -78,3 +81,9 @@ jobs:
         with:
           name: output
           path: output
+
+      - name: Upload emhermesc.js
+        uses: actions/upload-artifact@v3
+        with:
+          name: emhermesc.js
+          path: packages/metro-hermes-compiler/emhermesc.js
