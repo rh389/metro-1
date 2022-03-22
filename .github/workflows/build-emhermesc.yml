@@ -47,7 +47,7 @@ jobs:
             -DIMPORT_HERMESC:PATH="$RUNNER_TEMP/build_host_hermes/ImportHermesc.cmake"
 
       - name: Build
-        run: cmake --build $RUNNER_TEMP/embuild --target hermes
+        run: cmake --build $RUNNER_TEMP/embuild --target emhermesc
 
       - name: Show result
         run: ls -la $RUNNER_TEMP/embuild/bin
