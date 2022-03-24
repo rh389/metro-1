@@ -17,14 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code (PR)
-        uses: actions/checkout@v2.0.0
-        # https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch
-        if: github.event_name == 'pull_request' 
-        with:
-          ref: ${{ github.head_ref }}
-
-      - name: Checkout code (Push)
+      - name: Checkout code
         uses: actions/checkout@v2.0.0
         if: github.event_name == 'push'
 
