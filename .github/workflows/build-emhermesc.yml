@@ -22,7 +22,7 @@ jobs:
         # https://github.com/stefanzweifel/git-auto-commit-action#checkout-the-correct-branch
         if: github.event_name == 'pull_request' 
         with:
-          repository: ${{ github.repository }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.head_ref }}
           path: metro
 
