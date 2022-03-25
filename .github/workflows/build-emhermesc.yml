@@ -28,6 +28,7 @@ jobs:
 
       - name: Checkout code (Push)
         uses: actions/checkout@v2.0.0
+        if: github.event_name == 'push'
         with:
           path: metro
 
